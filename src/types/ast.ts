@@ -29,20 +29,38 @@ export interface Identifier extends Expression, Pattern {
     name: string;
 }
 
+export interface SwitchCase extends AstNode {
+    type: "SwitchCase";
+    test: Expression | null;
+    consequent: [ Statement ];
+}
+
+export interface CatchClause extends AstNode {
+    type: "CatchClause";
+    param: Pattern;
+    body: BlockStatement;
+}
+
+interface VariableDeclarator extends AstNode {
+    type: "VariableDeclarator";
+    id: Pattern;
+    init: Expression | null;
+}
+
 /**
  * PROGRAMS
  */
 
 export interface ProgramNode extends AstNode {
-    body: Array<AstNode>
+    type: "Program"
+    body: Array<Directive | Statement >
 }
+
 
 /**
  * EXPRESSIONS
  */
-export interface Expression extends AstNode {
-
-}
+export interface Expression extends AstNode {}
 
 export interface Literal extends Expression {
     type: "Literal";
@@ -56,10 +74,16 @@ export interface ObjectExpression extends Expression {
 
 
 /**
- * INTERFACES
+ * STATEMENTS
  */
-export interface Statement extends AstNode {
+export interface Statement extends AstNode {}
 
+export interface Declaration extends Statement {};
+
+interface VariableDeclaration extends Declaration {
+    type: "VariableDeclaration";
+    declarations: [ VariableDeclarator ];
+    kind: "var";
 }
 
 export interface ReturnStatement extends Statement {
@@ -67,10 +91,109 @@ export interface ReturnStatement extends Statement {
     argument: Expression | null;
 }
 
+export interface BlockStatement extends Statement {
+    type: "BlockStatement";
+    body: Array<Statement>;
+}
+
+export interface FunctionBody extends BlockStatement {
+    body: Array<Directive | Statement>;
+}
+
+export interface EmptyStatement extends Statement {
+    type: "EmptyStatement";
+}
+
+export interface ExpressionStatement extends Statement {
+    type: "ExpressionStatement";
+    expression: Expression;
+}
+
+export interface Directive extends ExpressionStatement {
+    directive: string;
+}
+
+export interface DebuggerStatement extends Statement {
+    type: "DebuggerStatement";
+}
+
+export interface WithStatement extends Statement {
+    type: "WithStatement";
+    object: Expression;
+    body: Statement;
+}
+
+export interface LabeledStatement extends Statement {
+    type: "LabeledStatement";
+    label: Identifier;
+    body: Statement;
+}
+
+export interface BreakStatement extends Statement {
+    type: "BreakStatement";
+    label: Identifier | null;
+}
+
+export interface ContinueStatement extends Statement {
+    type: "ContinueStatement";
+    label: Identifier | null;
+}
+
+export interface IfStatement extends Statement {
+    type: "IfStatement";
+    test: Expression;
+    consequent: Statement;
+    alternate: Statement | null;
+}
+
+export interface SwitchStatement extends Statement {
+    type: "SwitchStatement";
+    discriminant: Expression;
+    cases: Array<SwitchCase>;
+}
+
+export interface ThrowStatement extends Statement {
+    type: "ThrowStatement";
+    argument: Expression;
+}
+
+export interface TryStatement extends Statement {
+    type: "TryStatement";
+    block: BlockStatement;
+    handler: CatchClause | null;
+    finalizer: BlockStatement | null;
+}
+
+export interface WhileStatement extends Statement {
+    type: "WhileStatement";
+    test: Expression;
+    body: Statement;
+}
+
+export interface DoWhileStatement extends Statement {
+    type: "DoWhileStatement";
+    body: Statement;
+    test: Expression;
+}
+
+export interface ForStatement extends Statement {
+    type: "ForStatement";
+    init: VariableDeclaration | Expression | null;
+    test: Expression | null;
+    update: Expression | null;
+    body: Statement;
+}
+
+/**
+ * FUNCTIONS
+ */
+export interface Function extends AstNode {
+    id: Identifier | null;
+    params: [Pattern];
+    body: FunctionBody;
+}
 
 /**
  * PATTERNS
  */
-export interface Pattern extends AstNode {
-
-}
+export interface Pattern extends AstNode {}
