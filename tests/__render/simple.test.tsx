@@ -4,7 +4,7 @@ import * as TestUtils from 'react-dom/test-utils';
 import Program from '../../src/components/nodes/Program';
 import { ProgramNode } from '../../src/types/ast';
 import { parse } from '../../src/utils/parser';
-import Render from '../utils/render';
+import Render from '../__utils__/render';
 
 describe('simple program renders', () => {
     let simpleProgram = `console.log(1 + 1)`;

@@ -6,15 +6,14 @@ import Program from './nodes/Program';
 
 const reactLogo = require("./../assets/img/react_logo.svg");
 import "./../assets/scss/App.scss";
+import { ProgramNode } from "../types/ast";
 
 class App extends React.Component<Record<string, unknown>, undefined> {
   public render() {
+    let progNode = ast as  unknown as ProgramNode;
     return (
       <div className="app">
-        <h1>Hello Ast Mobile!</h1>
-        <p>This is going to be a mobile IDE one day!</p>
-        <img src={reactLogo.default} height="480" />
-        <Program node={ast} />
+        <Program node={progNode} />
       </div>
     );
   }

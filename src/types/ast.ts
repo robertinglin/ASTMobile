@@ -1,3 +1,4 @@
+
 /**
  * STANDARD 
  */
@@ -12,9 +13,8 @@ export interface SourceLocation {
     end: Position;
 }
 
-export type AstNode = {
-    type: String,
-    loc: SourceLocation | null;
+export interface AstNode extends SourceLocation {
+    type: String
 }
 
 export interface Property extends AstNode {
