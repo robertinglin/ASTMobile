@@ -41,11 +41,46 @@ export interface CatchClause extends AstNode {
     body: BlockStatement;
 }
 
-interface VariableDeclarator extends AstNode {
+export interface VariableDeclarator extends AstNode {
     type: "VariableDeclarator";
     id: Pattern;
     init: Expression | null;
 }
+
+export enum UnaryOperator {
+    "-",
+    "+",
+    "!","~",
+    "typeof",
+    "void",
+    "delete"
+};
+
+export enum UpdateOperator {
+    "++",
+    "--"
+}
+
+export enum BinaryOperator {
+    "==" , "!=" , "===" , "!=="
+         , "<" , "<=" , ">" , ">="
+         , "<<" , ">>" , ">>>"
+         , "+" , "-" , "*" , "/" , "%"
+         , "," , "^" , "&" , "in"
+         , "instanceof"
+};
+
+export enum AssignmentOperator {
+    "=" , "+=" , "-=" , "*=" , "/=" , "%="
+        , "<<=" , ">>=" , ">>>="
+        , ",=" , "^=" , "&="
+}
+
+export enum LogicalOperator {
+    "||",
+    "&&"
+}
+
 
 /**
  * PROGRAMS
@@ -67,11 +102,97 @@ export interface Literal extends Expression {
     value: string | boolean | null | number | RegExp;
 }
 
+
+export interface RegExpLiteral extends Literal {
+    regex: {
+      pattern: string;
+      flags: string;
+    };
+}
+
 export interface ObjectExpression extends Expression {
     type: "ObjectExpression";
     properties: Array<Property>;
 }
 
+export interface ThisExpression extends Expression {
+    type: "ThisExpression";
+}
+
+export interface ArrayExpression extends Expression {
+    type: "ArrayExpression";
+    elements: Array<Expression | null>;
+}
+
+export interface FunctionExpression extends Function, Expression {
+    type: "FunctionExpression";
+}
+
+export interface UnaryExpression extends Expression {
+    type: "UnaryExpression";
+    operator: UnaryOperator;
+    prefix: boolean;
+    argument: Expression;
+}
+
+export interface UpdateExpression extends Expression {
+    type: "UpdateExpression";
+    operator: UpdateOperator;
+    argument: Expression;
+    prefix: boolean;
+}
+
+export interface BinaryExpression extends Expression {
+    type: "BinaryExpression";
+    operator: BinaryOperator;
+    left: Expression;
+    right: Expression;
+}
+
+export interface AssignmentExpression extends Expression {
+    type: "AssignmentExpression";
+    operator: AssignmentOperator;
+    left: Pattern | Expression;
+    right: Expression;
+}
+
+export interface LogicalExpression extends Expression {
+    type: "LogicalExpression";
+    operator: LogicalOperator;
+    left: Expression;
+    right: Expression;
+}
+
+export interface MemberExpression extends Expression, Pattern {
+    type: "MemberExpression";
+    object: Expression;
+    property: Expression;
+    computed: boolean;
+}
+
+export interface ConditionalExpression extends Expression {
+    type: "ConditionalExpression";
+    test: Expression;
+    alternate: Expression;
+    consequent: Expression;
+}
+
+export interface CallExpression extends Expression {
+    type: "CallExpression";
+    callee: Expression;
+    arguments: Array<Expression>;
+}
+
+export interface NewExpression extends Expression {
+    type: "NewExpression";
+    callee: Expression;
+    arguments: Array<Expression>;
+}
+
+export interface SequenceExpression extends Expression {
+    type: "SequenceExpression";
+    expressions: [ Expression ];
+}
 
 /**
  * STATEMENTS
