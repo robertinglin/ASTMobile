@@ -9,8 +9,8 @@ export interface Position {
 
 export interface SourceLocation {
     source: string | null;
-    start: Position;
-    end: Position;
+    start: number;
+    end: number;
 }
 
 export interface AstNode extends SourceLocation {
@@ -311,7 +311,12 @@ export interface ForStatement extends Statement {
 export interface Function extends AstNode {
     id: Identifier | null;
     params: [Pattern];
-    body: FunctionBody;
+    body: FunctionBody
+}
+
+export interface FunctionDeclaration extends Function, Declaration {
+    type: "FunctionDeclaration";
+    id: Identifier;
 }
 
 /**
