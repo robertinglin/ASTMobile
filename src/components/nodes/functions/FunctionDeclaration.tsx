@@ -9,12 +9,11 @@ type FunctionDeclarationProps = {
 }
 
 const FunctionDeclarationRenderer = (props: FunctionDeclarationProps) => {
-        console.log(props.node);
+        console.log("props.node in renderer", props.node);
         const functionBodyNode : FunctionBody = props.node.body as FunctionBody; 
         return <div>
             function <NodeSwitch node={props.node.id} /> ({props.node.params.map((node) => <NodeSwitch node={node} />)}) {leftCurlyBrace()} 
-            {functionBodyNode.body.map((node) => <NodeSwitch node={node} />)}
-            {rightCurlyBrace()}
+            {functionBodyNode.body.map((node) => <NodeSwitch node={node} />)}{rightCurlyBrace()}
         </div>;
 }
 
