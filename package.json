@@ -69,6 +69,8 @@
   },
   "dependencies": {
     "acorn": "^8.3.0",
-    "astring": "^1.7.5"
+    "astring": "^1.7.5",
+    "octokit": "^1.0.5",
+    "regenerator-runtime": "^0.13.7"
   }
 }
