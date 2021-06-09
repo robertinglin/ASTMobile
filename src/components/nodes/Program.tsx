@@ -14,7 +14,9 @@ const Program = (props: ProgramProps) => {
     return (
         <div>
             Program  {leftCurlyBrace()}
+            <div style={{ marginLeft: '15px'}}>
             {props.node.body.map((node) => <NodeSwitch node={node} />)}
+            </div>
             {rightCurlyBrace()}
         </div>
     );

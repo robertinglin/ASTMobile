@@ -13,7 +13,8 @@ const FunctionDeclarationRenderer = (props: FunctionDeclarationProps) => {
         const functionBodyNode : FunctionBody = props.node.body as FunctionBody; 
         return <div>
             function <NodeSwitch node={props.node.id} /> ({props.node.params.map((node) => <NodeSwitch node={node} />)}) {leftCurlyBrace()} 
-            {functionBodyNode.body.map((node) => <NodeSwitch node={node} />)}{rightCurlyBrace()}
+            <div style={{ marginLeft: '15px'}}>{functionBodyNode.body.map((node) => <NodeSwitch node={node} />)}
+            </div>{rightCurlyBrace()}
         </div>;
 }
 
