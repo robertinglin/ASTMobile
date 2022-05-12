@@ -13,9 +13,6 @@ const init = async () : Promise<Octokit> => {
     }
     console.log(Octokit);
 
-    console.log('Hello Shivam');
-    console.log('I said hello Shivam');
-
     octokit = new Octokit()//{ auth: token.github });
 
     // const {
@@ -28,8 +25,6 @@ const init = async () : Promise<Octokit> => {
 export const getGists = async () => {
     await init();
     const gists = await octokit.rest.gists.listPublic();
-    console.log('gists');
-    console.log(gists);
     return gists;
 }
 
