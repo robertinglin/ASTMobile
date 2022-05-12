@@ -14,6 +14,7 @@ const init = async () : Promise<Octokit> => {
     console.log(Octokit);
 
     console.log('Hello Shivam');
+    console.log('I said hello Shivam');
 
     octokit = new Octokit()//{ auth: token.github });
 
