@@ -28,7 +28,9 @@ const init = async () : Promise<Octokit> => {
 export const getGists = async () => {
     await init();
     const gists = await octokit.rest.gists.listPublic();
-    console.log("gists", gists)
+    console.log('gists');
+
+    console.log(gists);
     return gists;
 }
 
