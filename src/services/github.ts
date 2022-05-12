@@ -13,6 +13,8 @@ const init = async () : Promise<Octokit> => {
     }
     console.log(Octokit);
 
+    console.log('Hello Shivam');
+
     octokit = new Octokit()//{ auth: token.github });
 
     // const {
